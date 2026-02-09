@@ -1,0 +1,39 @@
+OTNO(
+  (fno_blocks): FNOBlocks(
+    (convs): ModuleList(
+      (0-3): 4 x SpectralConv(
+        (weight): DenseTensor(shape=torch.Size([64, 64, 16, 9]), rank=None)
+      )
+    )
+    (fno_skips): ModuleList(
+      (0-3): 4 x Flattened1dConv(
+        (conv): Conv1d(64, 64, kernel_size=(1,), stride=(1,), bias=False)
+      )
+    )
+    (channel_mlp): ModuleList(
+      (0-3): 4 x ChannelMLP(
+        (fcs): ModuleList(
+          (0-1): 2 x Conv1d(64, 64, kernel_size=(1,), stride=(1,))
+        )
+      )
+    )
+    (channel_mlp_skips): ModuleList(
+      (0-3): 4 x SoftGating()
+    )
+    (norm): ModuleList(
+      (0-7): 8 x GroupNorm(1, 64, eps=1e-05, affine=True)
+    )
+  )
+  (lifting): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(9, 128, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(128, 64, kernel_size=(1,), stride=(1,))
+    )
+  )
+  (projection): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(64, 128, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(128, 1, kernel_size=(1,), stride=(1,))
+    )
+  )
+)

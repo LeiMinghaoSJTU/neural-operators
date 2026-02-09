@@ -1,0 +1,43 @@
+SFNO(
+  (positional_embedding): GridEmbeddingND()
+  (domain_padding): DomainPadding()
+  (fno_blocks): FNOBlocks(
+    (convs): ModuleList(
+      (0-1): 2 x SphericalConv(
+        (weight): ComplexDenseTensor(shape=torch.Size([64, 64, 16]), rank=None)
+        (sht_handle): SHT(
+          (_SHT_cache): ModuleDict()
+          (_iSHT_cache): ModuleDict()
+        )
+      )
+    )
+    (fno_skips): ModuleList(
+      (0-1): 2 x Flattened1dConv(
+        (conv): Conv1d(64, 64, kernel_size=(1,), stride=(1,), bias=False)
+      )
+    )
+    (channel_mlp): ModuleList(
+      (0-1): 2 x ChannelMLP(
+        (fcs): ModuleList(
+          (0): Conv1d(64, 32, kernel_size=(1,), stride=(1,))
+          (1): Conv1d(32, 64, kernel_size=(1,), stride=(1,))
+        )
+      )
+    )
+    (channel_mlp_skips): ModuleList(
+      (0-1): 2 x SoftGating()
+    )
+  )
+  (lifting): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(5, 128, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(128, 64, kernel_size=(1,), stride=(1,))
+    )
+  )
+  (projection): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(64, 128, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(128, 3, kernel_size=(1,), stride=(1,))
+    )
+  )
+)

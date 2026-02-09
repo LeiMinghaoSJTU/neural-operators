@@ -1,0 +1,150 @@
+UNO(
+  (positional_embedding): GridEmbeddingND()
+  (lifting): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(3, 256, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(256, 64, kernel_size=(1,), stride=(1,))
+    )
+  )
+  (fno_blocks): ModuleList(
+    (0): FNOBlocks(
+      (convs): ModuleList(
+        (0): SpectralConv(
+          (weight): DenseTensor(shape=torch.Size([64, 32, 8, 5]), rank=None)
+        )
+      )
+      (fno_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(64, 32, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+      (channel_mlp): ModuleList(
+        (0): ChannelMLP(
+          (fcs): ModuleList(
+            (0): Conv1d(32, 16, kernel_size=(1,), stride=(1,))
+            (1): Conv1d(16, 32, kernel_size=(1,), stride=(1,))
+          )
+        )
+      )
+      (channel_mlp_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(64, 32, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+    )
+    (1): FNOBlocks(
+      (convs): ModuleList(
+        (0): SpectralConv(
+          (weight): DenseTensor(shape=torch.Size([32, 64, 8, 5]), rank=None)
+        )
+      )
+      (fno_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(32, 64, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+      (channel_mlp): ModuleList(
+        (0): ChannelMLP(
+          (fcs): ModuleList(
+            (0): Conv1d(64, 32, kernel_size=(1,), stride=(1,))
+            (1): Conv1d(32, 64, kernel_size=(1,), stride=(1,))
+          )
+        )
+      )
+      (channel_mlp_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(32, 64, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+    )
+    (2): FNOBlocks(
+      (convs): ModuleList(
+        (0): SpectralConv(
+          (weight): DenseTensor(shape=torch.Size([64, 64, 4, 3]), rank=None)
+        )
+      )
+      (fno_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(64, 64, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+      (channel_mlp): ModuleList(
+        (0): ChannelMLP(
+          (fcs): ModuleList(
+            (0): Conv1d(64, 32, kernel_size=(1,), stride=(1,))
+            (1): Conv1d(32, 64, kernel_size=(1,), stride=(1,))
+          )
+        )
+      )
+      (channel_mlp_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(64, 64, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+    )
+    (3): FNOBlocks(
+      (convs): ModuleList(
+        (0): SpectralConv(
+          (weight): DenseTensor(shape=torch.Size([128, 64, 8, 5]), rank=None)
+        )
+      )
+      (fno_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(128, 64, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+      (channel_mlp): ModuleList(
+        (0): ChannelMLP(
+          (fcs): ModuleList(
+            (0): Conv1d(64, 32, kernel_size=(1,), stride=(1,))
+            (1): Conv1d(32, 64, kernel_size=(1,), stride=(1,))
+          )
+        )
+      )
+      (channel_mlp_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(128, 64, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+    )
+    (4): FNOBlocks(
+      (convs): ModuleList(
+        (0): SpectralConv(
+          (weight): DenseTensor(shape=torch.Size([96, 32, 8, 5]), rank=None)
+        )
+      )
+      (fno_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(96, 32, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+      (channel_mlp): ModuleList(
+        (0): ChannelMLP(
+          (fcs): ModuleList(
+            (0): Conv1d(32, 16, kernel_size=(1,), stride=(1,))
+            (1): Conv1d(16, 32, kernel_size=(1,), stride=(1,))
+          )
+        )
+      )
+      (channel_mlp_skips): ModuleList(
+        (0): Flattened1dConv(
+          (conv): Conv1d(96, 32, kernel_size=(1,), stride=(1,), bias=False)
+        )
+      )
+    )
+  )
+  (horizontal_skips): ModuleDict(
+    (0): Flattened1dConv(
+      (conv): Conv1d(32, 32, kernel_size=(1,), stride=(1,), bias=False)
+    )
+    (1): Flattened1dConv(
+      (conv): Conv1d(64, 64, kernel_size=(1,), stride=(1,), bias=False)
+    )
+  )
+  (projection): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(32, 64, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(64, 1, kernel_size=(1,), stride=(1,))
+    )
+  )
+)

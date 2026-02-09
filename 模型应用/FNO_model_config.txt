@@ -1,0 +1,41 @@
+当前FNO模型的参数总量：191881 个。
+
+### 模型配置 ###
+FNO(
+  (positional_embedding): GridEmbeddingND()
+  (fno_blocks): FNOBlocks(
+    (convs): ModuleList(
+      (0-3): 4 x SpectralConv(
+        (weight): DenseTensor(shape=torch.Size([24, 24, 8, 5]), rank=None)
+      )
+    )
+    (fno_skips): ModuleList(
+      (0-3): 4 x Flattened1dConv(
+        (conv): Conv1d(24, 24, kernel_size=(1,), stride=(1,), bias=False)
+      )
+    )
+    (channel_mlp): ModuleList(
+      (0-3): 4 x ChannelMLP(
+        (fcs): ModuleList(
+          (0): Conv1d(24, 12, kernel_size=(1,), stride=(1,))
+          (1): Conv1d(12, 24, kernel_size=(1,), stride=(1,))
+        )
+      )
+    )
+    (channel_mlp_skips): ModuleList(
+      (0-3): 4 x SoftGating()
+    )
+  )
+  (lifting): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(3, 48, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(48, 24, kernel_size=(1,), stride=(1,))
+    )
+  )
+  (projection): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(24, 48, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(48, 1, kernel_size=(1,), stride=(1,))
+    )
+  )
+)
