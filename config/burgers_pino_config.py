@@ -23,7 +23,7 @@ class BurgersDatasetConfig(ConfigBase):
 
 
 class BurgersOptConfig(OptimizationConfig):
-    n_epochs: int = 10000
+    n_epochs: int = 10
     training_loss: List[str] = ["equation", "ic", "l2"] # ["equation", "l2"... or "ic"...]
     testing_loss: str = "l2"
     learning_rate: float = 1e-4
@@ -46,4 +46,4 @@ class Default(ConfigBase):
     opt: OptimizationConfig = BurgersOptConfig()
     data: BurgersDatasetConfig = BurgersDatasetConfig()
     patching: PatchingConfig = PatchingConfig()
-    wandb: WandbConfig = WandbConfig()
+    wandb: WandbConfig = WandbConfig(log = True, log_output = True)

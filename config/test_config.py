@@ -2,7 +2,7 @@ from typing import Any, List, Optional
 
 from zencfg import ConfigBase
 from .distributed import DistributedConfig
-from .datasets import NavierStokesDatasetConfig
+from .navier_stokes_config import NavierStokesDatasetConfig
 from .models import ModelConfig, SimpleFNOConfig
 from .opt import OptimizationConfig, PatchingConfig
 from .wandb import WandbConfig

@@ -1,3 +1,13 @@
+pandas
+numpy
+PyWavelets
+librosa
+matplotlib
+seaborn
+plotly
+torch
+torchvision
+torchaudio
 wandb
 ruamel.yaml
 configmypy
@@ -5,7 +15,10 @@ zencfg
 tensorly
 tensorly-torch
 torch-harmonics
-matplotlib
 opt-einsum
 h5py
 zarr
+black
+flaky
+pytest
+neuraloperator
