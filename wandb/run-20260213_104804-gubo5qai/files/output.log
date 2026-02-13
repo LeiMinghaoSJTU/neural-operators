@@ -1,0 +1,136 @@
+##### 训练配置 ######
+{'_config_name': 'default', 'n_params_baseline': None, 'verbose': True, 'arch': 'rno', 'distributed': {'use_distributed': False, 'model_parallel_size': 1, 'seed': None}, 'model': {'model_arch': 'rno', 'data_channels': 1, 'out_channels': 1, 'n_modes': [8], 'hidden_channels': 32, 'n_layers': 2, 'rno_skip': False}, 'opt': {'n_epochs': 10000, 'training_loss': 'l2', 'testing_loss': 'l2', 'learning_rate': 0.001, 'weight_decay': 0.0, 'eval_interval': 1, 'mixed_precision': False, 'scheduler': 'StepLR', 'scheduler_patience': 100, 'step_size': 60, 'gamma': 0.5}, 'data': {'folder': 'dataset', 'batch_size': 16, 'n_train': 800, 'test_batch_sizes': [16], 'n_tests': [400], 'spatial_length': 16, 'temporal_length': 17, 'temporal_subsample': None, 'encode_input': False, 'encode_output': False, 'include_endpoint': [True, False]}, 'patching': {'levels': 0, 'padding': 0, 'stitching': False}, 'wandb': {'log': True, 'entity': None, 'project': None, 'name': None, 'group': None, 'sweep': False, 'log_output': True}}
+Loading test db for resolution 16 with 400 samples
+
+### 模型结构 ###
+ RNOTimeAdapter(
+  (core): RNO(
+    (positional_embedding): GridEmbeddingND()
+    (layers): ModuleList(
+      (0-1): 2 x RNOBlock(
+        (cell): RNOCell(
+          (input_gates): ModuleList(
+            (0-2): 3 x FNOBlocks(
+              (convs): ModuleList(
+                (0): SpectralConv(
+                  (weight): DenseTensor(shape=torch.Size([32, 32, 5]), rank=None)
+                )
+              )
+              (fno_skips): ModuleList(
+                (0): Flattened1dConv(
+                  (conv): Conv1d(32, 32, kernel_size=(1,), stride=(1,), bias=False)
+                )
+              )
+              (channel_mlp): ModuleList(
+                (0): ChannelMLP(
+                  (fcs): ModuleList(
+                    (0): Conv1d(32, 16, kernel_size=(1,), stride=(1,))
+                    (1): Conv1d(16, 32, kernel_size=(1,), stride=(1,))
+                  )
+                )
+              )
+              (channel_mlp_skips): ModuleList(
+                (0): SoftGating()
+              )
+            )
+          )
+          (hidden_gates): ModuleList(
+            (0-2): 3 x FNOBlocks(
+              (convs): ModuleList(
+                (0): SpectralConv(
+                  (weight): DenseTensor(shape=torch.Size([32, 32, 5]), rank=None)
+                )
+              )
+              (fno_skips): ModuleList(
+                (0): Flattened1dConv(
+                  (conv): Conv1d(32, 32, kernel_size=(1,), stride=(1,), bias=False)
+                )
+              )
+              (channel_mlp): ModuleList(
+                (0): ChannelMLP(
+                  (fcs): ModuleList(
+                    (0): Conv1d(32, 16, kernel_size=(1,), stride=(1,))
+                    (1): Conv1d(16, 32, kernel_size=(1,), stride=(1,))
+                  )
+                )
+              )
+              (channel_mlp_skips): ModuleList(
+                (0): SoftGating()
+              )
+            )
+          )
+          (biases): ParameterList(
+              (0): Parameter containing: [torch.float32 of size ]
+              (1): Parameter containing: [torch.float32 of size ]
+              (2): Parameter containing: [torch.float32 of size ]
+          )
+        )
+      )
+    )
+    (lifting): ChannelMLP(
+      (fcs): ModuleList(
+        (0): Conv1d(2, 64, kernel_size=(1,), stride=(1,))
+        (1): Conv1d(64, 32, kernel_size=(1,), stride=(1,))
+      )
+    )
+    (projection): ChannelMLP(
+      (fcs): ModuleList(
+        (0): Conv1d(32, 64, kernel_size=(1,), stride=(1,))
+        (1): Conv1d(64, 1, kernel_size=(1,), stride=(1,))
+      )
+    )
+  )
+)
+
+### 优化器 ###
+ AdamW (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    correct_bias: True
+    eps: 1e-06
+    initial_lr: 0.001
+    lr: 0.001
+    weight_decay: 0.0
+)
+
+### 学习率调度器 ###
+ <torch.optim.lr_scheduler.StepLR object at 0x000002364A110950>
+
+### 损失函数 ###
+
+ * 训练损失: <neuralop.losses.data_losses.LpLoss object at 0x0000023646E23890>
+
+ * 测试损失: {'l2': <neuralop.losses.data_losses.LpLoss object at 0x0000023646E23890>}
+
+### 开始训练...
+
+
+模型总参数量: 153257
+Training on 800 samples
+Testing on [400] samples         on resolutions [16].
+Raw outputs of shape torch.Size([16, 1, 16])
+C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\neuralop\training\trainer.py:536: UserWarning: LpLoss.__call__() received unexpected keyword arguments: ['x']. These arguments will be ignored.
+  loss += training_loss(out, **sample)
+[0] time=15.80, avg_loss=0.8312, train_err=13.2996
+C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\neuralop\training\trainer.py:581: UserWarning: LpLoss.__call__() received unexpected keyword arguments: ['x']. These arguments will be ignored.
+  val_loss = loss(out, **sample)
+Traceback (most recent call last):
+  File "d:\document\python\neural operators\scripts\train_burgers_rno.py", line 353, in <module>
+    main()
+  File "d:\document\python\neural operators\scripts\train_burgers_rno.py", line 336, in main
+    trainer.train(
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\neuralop\training\trainer.py", line 245, in train
+    eval_metrics = self.evaluate_all(
+                   ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\neuralop\training\trainer.py", line 373, in evaluate_all
+    loader_metrics = self.evaluate(
+                     ^^^^^^^^^^^^^^
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\neuralop\training\trainer.py", line 466, in evaluate
+    errors[f"{log_prefix}_outputs"] = wandb.Image(outs)
+                                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\data_types\image.py", line 277, in __init__
+    self._initialize_from_data(data_or_path, mode, file_type, normalize)
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\wandb\sdk\data_types\image.py", line 417, in _initialize_from_data
+    data = data.permute(1, 2, 0).cpu().numpy()  # type: ignore [union-attr]
+           ^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: permute(sparse_coo): number of dimensions in the tensor input does not match the length of the desired ordering of dimensions i.e. input.dim() = 4 is not equal to len(dims) = 3

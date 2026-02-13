@@ -60,16 +60,19 @@ print(f"使用计算设备: {device}")  # 新增：打印使用的设备，便�
 
 # ======================== 3. WandB实验跟踪配置 ========================
 if config.wandb.log:
+    print("启用WandB日志系统")
     # 登录WandB（通过密钥认证）
     wandb.login(key=get_wandb_api_key())
     # 设置WandB实验名称（优先使用配置中的名称，否则自动生成）
     if config.wandb.name:
         wandb_name = config.wandb.name
+        print(f"使用WandB实验名称: {wandb_name}")
     else:
         # 自动生成实验名称：配置名+模型架构+层数+模态数+隐藏通道数
         wandb_name = "_".join(
             f"{var}"
             for var in [
+                "burgers",
                 config_name,
                 config.model.model_arch,
                 config.model.n_layers,
@@ -77,6 +80,8 @@ if config.wandb.log:
                 config.model.hidden_channels,
             ]
         )
+        print(f"自动生成WandB实验名称: {wandb_name}")
+        config.wandb.name = wandb_name  # 将生成的名称写回配置，便于后续使用
     # WandB初始化参数
     wandb_init_args = dict(
         config=config,          # 记录实验配置
@@ -417,7 +422,7 @@ print("\n训练完成！")
 # ======================== 训练结束 - 保存模型 ========================
 # 定义模型保存路径（建议包含实验名称，便于区分）
 import os
-save_dir = os.path.join(get_project_root(), "trained_models", wandb_name if config.wandb.log else "burgers_pino_model")
+save_dir = os.path.join("./", "trained_models", wandb_name if config.wandb.name else "burgers_pino_model")
 os.makedirs(save_dir, exist_ok=True)
 
 # 保存核心内容：模型权重、配置、数据处理器（关键！保证预处理/后处理一致）

@@ -1,0 +1,21 @@
+2026-02-12 16:02:36,885 INFO    MainThread:2408 [wandb_setup.py:_flush():81] Current SDK version is 0.24.0
+2026-02-12 16:02:36,885 INFO    MainThread:2408 [wandb_setup.py:_flush():81] Configure stats pid to 2408
+2026-02-12 16:02:36,885 INFO    MainThread:2408 [wandb_setup.py:_flush():81] Loading settings from environment variables
+2026-02-12 16:02:36,885 INFO    MainThread:2408 [wandb_init.py:setup_run_log_directory():717] Logging user logs to D:\document\python\neural operators\wandb\run-20260212_160236-tx3vz70z\logs\debug.log
+2026-02-12 16:02:36,885 INFO    MainThread:2408 [wandb_init.py:setup_run_log_directory():718] Logging internal logs to D:\document\python\neural operators\wandb\run-20260212_160236-tx3vz70z\logs\debug-internal.log
+2026-02-12 16:02:36,885 INFO    MainThread:2408 [wandb_init.py:init():844] calling init triggers
+2026-02-12 16:02:36,885 INFO    MainThread:2408 [wandb_init.py:init():849] wandb.init called with sweep_config: {}
+config: {'_config_name': 'default', 'n_params_baseline': None, 'verbose': True, 'arch': 'rno', 'distributed': {'use_distributed': False, 'model_parallel_size': 1, 'seed': None}, 'model': {'model_arch': 'rno', 'data_channels': 1, 'out_channels': 1, 'n_modes': [8], 'hidden_channels': 32, 'n_layers': 2, 'rno_skip': False}, 'opt': {'n_epochs': 10000, 'training_loss': 'l2', 'testing_loss': 'l2', 'learning_rate': 0.001, 'weight_decay': 0.0, 'eval_interval': 1, 'mixed_precision': False, 'scheduler': 'StepLR', 'scheduler_patience': 100, 'step_size': 60, 'gamma': 0.5}, 'data': {'folder': 'dataset', 'batch_size': 16, 'n_train': 800, 'test_batch_sizes': [16], 'n_tests': [400], 'spatial_length': 16, 'temporal_length': 17, 'temporal_subsample': None, 'encode_input': False, 'encode_output': False, 'include_endpoint': [True, False]}, 'patching': {'levels': 0, 'padding': 0, 'stitching': False}, 'wandb': {'log': True, 'entity': None, 'project': None, 'name': None, 'group': None, 'sweep': False, 'log_output': True}, '_wandb': {}}
+2026-02-12 16:02:36,885 INFO    MainThread:2408 [wandb_init.py:init():892] starting backend
+2026-02-12 16:02:39,231 INFO    MainThread:2408 [wandb_init.py:init():895] sending inform_init request
+2026-02-12 16:02:39,260 INFO    MainThread:2408 [wandb_init.py:init():903] backend started and connected
+2026-02-12 16:02:39,261 INFO    MainThread:2408 [wandb_init.py:init():973] updated telemetry
+2026-02-12 16:02:39,290 INFO    MainThread:2408 [wandb_init.py:init():997] communicating run to backend with 90.0 second timeout
+2026-02-12 16:02:41,045 INFO    MainThread:2408 [wandb_init.py:init():1044] starting run threads in backend
+2026-02-12 16:02:41,171 INFO    MainThread:2408 [wandb_run.py:_console_start():2529] atexit reg
+2026-02-12 16:02:41,171 INFO    MainThread:2408 [wandb_run.py:_redirect():2377] redirect: wrap_raw
+2026-02-12 16:02:41,171 INFO    MainThread:2408 [wandb_run.py:_redirect():2446] Wrapping output streams.
+2026-02-12 16:02:41,171 INFO    MainThread:2408 [wandb_run.py:_redirect():2469] Redirects installed.
+2026-02-12 16:02:41,173 INFO    MainThread:2408 [wandb_init.py:init():1084] run started, returning control to user process
+2026-02-12 16:02:41,213 INFO    wandb-AsyncioManager-main:2408 [service_client.py:_forward_responses():80] Reached EOF.
+2026-02-12 16:02:41,213 INFO    wandb-AsyncioManager-main:2408 [mailbox.py:close():137] Closing mailbox, abandoning 1 handles.

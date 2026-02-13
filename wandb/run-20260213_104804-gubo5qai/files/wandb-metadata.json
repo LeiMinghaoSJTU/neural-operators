@@ -1,0 +1,28 @@
+{
+  "os":  "Windows-11-10.0.26100-SP0",
+  "python":  "CPython 3.12.9",
+  "startedAt":  "2026-02-13T02:48:04.500729Z",
+  "program":  "d:\\document\\python\\neural operators\\scripts\\train_burgers_rno.py",
+  "codePath":  "scripts\\train_burgers_rno.py",
+  "codePathLocal":  "scripts\\train_burgers_rno.py",
+  "git":  {
+    "remote":  "https://github.com/LeiMinghaoSJTU/neural-operators.git",
+    "commit":  "62617317202328927a9d50c1a276d6de8a690b53"
+  },
+  "email":  "lei_minghao@sjtu.edu.cn",
+  "root":  "D:\\document\\python\\neural operators",
+  "host":  "DESKTOP-0FTHPKJ",
+  "executable":  "C:\\Users\\MR\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "676993167360",
+      "used":  "560769413120"
+    }
+  },
+  "memory":  {
+    "total":  "33599430656"
+  },
+  "writerId":  "tl6rmkqd5bz7a76kcph2a83cjg2k4z5d"
+}

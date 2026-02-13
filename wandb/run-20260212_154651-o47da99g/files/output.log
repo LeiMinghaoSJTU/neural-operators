@@ -1,0 +1,9 @@
+##### 训练配置 ######
+{'_config_name': 'default', 'n_params_baseline': None, 'verbose': True, 'arch': 'rno', 'distributed': {'use_distributed': False, 'model_parallel_size': 1, 'seed': None}, 'model': {'model_arch': 'rno', 'data_channels': 1, 'out_channels': 1, 'n_modes': [8], 'hidden_channels': 32, 'n_layers': 2, 'rno_skip': False}, 'opt': {'n_epochs': 10000, 'training_loss': 'l2', 'testing_loss': 'l2', 'learning_rate': 0.001, 'weight_decay': 0.0, 'eval_interval': 1, 'mixed_precision': False, 'scheduler': 'StepLR', 'scheduler_patience': 100, 'step_size': 60, 'gamma': 0.5}, 'data': {'folder': 'neuralop/data/datasets/data/', 'batch_size': 16, 'n_train': 800, 'test_batch_sizes': [16], 'n_tests': [400], 'spatial_length': 16, 'temporal_length': 17, 'temporal_subsample': None, 'encode_input': False, 'encode_output': False, 'include_endpoint': [True, False]}, 'patching': {'levels': 0, 'padding': 0, 'stitching': False}, 'wandb': {'log': True, 'entity': None, 'project': None, 'name': None, 'group': None, 'sweep': False, 'log_output': True}}
+Traceback (most recent call last):
+  File "d:\document\python\neural operators\scripts\train_burgers_rno.py", line 353, in <module>
+    main()
+  File "d:\document\python\neural operators\scripts\train_burgers_rno.py", line 243, in main
+    data_path = PROJECT_ROOT / config.data.folder  # 数据集根路径
+                ~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for /: 'str' and 'str'

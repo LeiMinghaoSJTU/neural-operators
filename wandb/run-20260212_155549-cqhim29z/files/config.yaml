@@ -1,0 +1,102 @@
+_config_name:
+    value: default
+_wandb:
+    value:
+        cli_version: 0.24.0
+        e:
+            dnupvidindu67r69fytbhxb7fi1wlgt0:
+                codePath: scripts\train_burgers_rno.py
+                codePathLocal: scripts\train_burgers_rno.py
+                email: lei_minghao@sjtu.edu.cn
+                executable: C:\Users\MR\AppData\Local\Programs\Python\Python312\python.exe
+                git:
+                    commit: 62617317202328927a9d50c1a276d6de8a690b53
+                    remote: https://github.com/LeiMinghaoSJTU/neural-operators.git
+                host: DESKTOP-0FTHPKJ
+                os: Windows-11-10.0.26100-SP0
+                program: d:\document\python\neural operators\scripts\train_burgers_rno.py
+                python: CPython 3.12.9
+                root: D:\document\python\neural operators
+                startedAt: "2026-02-12T07:55:49.723495Z"
+                writerId: dnupvidindu67r69fytbhxb7fi1wlgt0
+        m: []
+        python_version: 3.12.9
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 13
+                - 16
+            "4": 3.12.9
+            "5": 0.24.0
+            "8":
+                - 3
+            "12": 0.24.0
+            "13": windows-amd64
+arch:
+    value: rno
+data:
+    value:
+        batch_size: 16
+        encode_input: false
+        encode_output: false
+        folder: neuralop/data/datasets/data/
+        include_endpoint:
+            - true
+            - false
+        n_tests:
+            - 400
+        n_train: 800
+        spatial_length: 16
+        temporal_length: 17
+        temporal_subsample: null
+        test_batch_sizes:
+            - 16
+distributed:
+    value:
+        model_parallel_size: 1
+        seed: null
+        use_distributed: false
+model:
+    value:
+        data_channels: 1
+        hidden_channels: 32
+        model_arch: rno
+        n_layers: 2
+        n_modes:
+            - 8
+        out_channels: 1
+        rno_skip: false
+n_params_baseline:
+    value: null
+opt:
+    value:
+        eval_interval: 1
+        gamma: 0.5
+        learning_rate: 0.001
+        mixed_precision: false
+        n_epochs: 10000
+        scheduler: StepLR
+        scheduler_patience: 100
+        step_size: 60
+        testing_loss: l2
+        training_loss: l2
+        weight_decay: 0
+patching:
+    value:
+        levels: 0
+        padding: 0
+        stitching: false
+verbose:
+    value: true
+wandb:
+    value:
+        entity: null
+        group: null
+        log: true
+        log_output: true
+        name: null
+        project: null
+        sweep: false

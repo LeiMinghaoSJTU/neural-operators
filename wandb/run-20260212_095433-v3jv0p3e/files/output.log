@@ -1,0 +1,209 @@
+##### 实验配置详情 ######
+{'_config_name': 'default', 'n_params_baseline': None, 'verbose': True, 'arch': 'fno', 'distributed': {'use_distributed': False, 'model_parallel_size': 1, 'seed': None}, 'model': {'model_arch': 'fno', 'lifting_channel_ratio': 2, 'projection_channel_ratio': 2, 'n_layers': 4, 'domain_padding': 0.0, 'norm': None, 'fno_skip': 'linear', 'implementation': 'factorized', 'use_channel_mlp': True, 'channel_mlp_expansion': 0.5, 'channel_mlp_dropout': 0, 'separable': False, 'factorization': None, 'rank': 1.0, 'fixed_rank_modes': False, 'stabilizer': None, 'data_channels': 1, 'out_channels': 1, 'n_modes': [16, 16], 'hidden_channels': 24}, 'opt': {'training_loss': ['equation', 'ic', 'l2'], 'testing_loss': 'l2', 'learning_rate': 0.0001, 'weight_decay': 0.0001, 'eval_interval': 1, 'mixed_precision': False, 'scheduler': 'ReduceLROnPlateau', 'scheduler_T_max': 500, 'scheduler_patience': 100, 'step_size': 60, 'gamma': 0.5, 'n_epochs': 10, 'loss_aggregator': 'relobralo'}, 'data': {'folder': 'neuralop/data/datasets/data/', 'batch_size': 16, 'n_train': 800, 'test_batch_sizes': [16], 'n_tests': [400], 'spatial_length': 16, 'temporal_length': 17, 'temporal_subsample': None, 'encode_input': False, 'encode_output': False, 'include_endpoint': [True, False]}, 'patching': {'levels': 0, 'padding': 0, 'stitching': False}, 'wandb': {'log': True, 'entity': None, 'project': None, 'name': None, 'group': None, 'sweep': False, 'log_output': True}}
+尝试打开的路径是: C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages
+Loading test db for resolution 16 with 400 samples
+数据集加载完成：训练批次数量=50, 测试集数量=1
+模型构建完成，部署到cpu
+训练使用的损失函数: ['equation', 'ic', 'l2']
+
+### 模型结构 ###
+ FNO(
+  (positional_embedding): GridEmbeddingND()
+  (fno_blocks): FNOBlocks(
+    (convs): ModuleList(
+      (0-3): 4 x SpectralConv(
+        (weight): DenseTensor(shape=torch.Size([24, 24, 16, 9]), rank=None)
+      )
+    )
+    (fno_skips): ModuleList(
+      (0-3): 4 x Flattened1dConv(
+        (conv): Conv1d(24, 24, kernel_size=(1,), stride=(1,), bias=False)
+      )
+    )
+    (channel_mlp): ModuleList(
+      (0-3): 4 x ChannelMLP(
+        (fcs): ModuleList(
+          (0): Conv1d(24, 12, kernel_size=(1,), stride=(1,))
+          (1): Conv1d(12, 24, kernel_size=(1,), stride=(1,))
+        )
+      )
+    )
+    (channel_mlp_skips): ModuleList(
+      (0-3): 4 x SoftGating()
+    )
+  )
+  (lifting): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(3, 48, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(48, 24, kernel_size=(1,), stride=(1,))
+    )
+  )
+  (projection): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(24, 48, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(48, 1, kernel_size=(1,), stride=(1,))
+    )
+  )
+)
+
+### 优化器 ###
+ AdamW (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    correct_bias: True
+    eps: 1e-06
+    lr: 0.0001
+    weight_decay: 0.0001
+)
+
+### 学习率调度器 ###
+ <torch.optim.lr_scheduler.ReduceLROnPlateau object at 0x0000022E0D1A0830>
+
+### 损失函数 ###
+
+ * 训练损失（聚合）: Relobralo()
+
+ * 测试损失: {'h1': <neuralop.losses.data_losses.H1Loss object at 0x0000022E0D2976B0>, 'l2': <neuralop.losses.data_losses.LpLoss object at 0x0000022E0E12DEE0>}
+
+### 开始训练...
+
+
+模型总参数数量: 671,113
+C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py:1786: UserWarning: FNO.forward() received unexpected keyword arguments: ['y']. These arguments will be ignored.
+  return forward_call(*args, **kwargs)
+d:\document\python\neural operators\scripts\train_burgers_pino.py:284: UserWarning: BurgersLoss.__call__() received unexpected keyword arguments: ['x']. These arguments will be ignored.
+  loss_val = loss_map[loss_name](pred, x=sample["x"])
+
+===== Epoch 1/10 =====
+平均训练总损失: 17.609196
+各损失分量平均值:
+  EQUATION 损失: 0.001135
+  IC 损失: 1.586051
+  L2 损失: 16.022010
+自适应损失权重:
+  EQUATION 权重: 1.000000
+  IC 权重: 1.000000
+  L2 权重: 1.000000
+
+16 测试集 L2 损失: 15.766655
+C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py:1786: UserWarning: FNO.forward() received unexpected keyword arguments: ['y']. These arguments will be ignored.
+  return forward_call(*args, **kwargs)
+d:\document\python\neural operators\scripts\train_burgers_pino.py:284: UserWarning: BurgersLoss.__call__() received unexpected keyword arguments: ['x']. These arguments will be ignored.
+  loss_val = loss_map[loss_name](pred, x=sample["x"])
+
+===== Epoch 2/10 =====
+平均训练总损失: 16.229716
+各损失分量平均值:
+  EQUATION 损失: 0.003069
+  IC 损失: 1.519162
+  L2 损失: 15.510767
+自适应损失权重:
+  EQUATION 权重: 0.987684
+  IC 权重: 0.959956
+  L2 权重: 1.052360
+
+16 测试集 L2 损失: 15.208035
+
+===== Epoch 3/10 =====
+平均训练总损失: 14.537582
+各损失分量平均值:
+  EQUATION 损失: 0.028525
+  IC 损失: 1.375357
+  L2 损失: 14.659517
+自适应损失权重:
+  EQUATION 权重: 1.924214
+  IC 权重: 0.506804
+  L2 权重: 0.568982
+
+16 测试集 L2 损失: 13.910458
+
+===== Epoch 4/10 =====
+平均训练总损失: 11.626578
+各损失分量平均值:
+  EQUATION 损失: 0.221376
+  IC 损失: 1.096435
+  L2 损失: 12.970380
+自适应损失权重:
+  EQUATION 权重: 1.099576
+  IC 权重: 0.864955
+  L2 权重: 1.035469
+
+16 测试集 L2 损失: 11.860631
+
+===== Epoch 5/10 =====
+平均训练总损失: 11.450146
+各损失分量平均值:
+  EQUATION 损失: 0.903331
+  IC 损失: 0.771233
+  L2 损失: 10.419751
+自适应损失权重:
+  EQUATION 权重: 0.936546
+  IC 权重: 0.912675
+  L2 权重: 1.150779
+
+16 测试集 L2 损失: 9.231460
+
+===== Epoch 6/10 =====
+平均训练总损失: 9.850110
+各损失分量平均值:
+  EQUATION 损失: 1.215961
+  IC 损失: 0.642710
+  L2 损失: 9.015721
+自适应损失权重:
+  EQUATION 权重: 1.057654
+  IC 权重: 1.003545
+  L2 权重: 0.938801
+
+16 测试集 L2 损失: 8.690215
+
+===== Epoch 7/10 =====
+平均训练总损失: 8.897413
+各损失分量平均值:
+  EQUATION 损失: 1.235940
+  IC 损失: 0.605203
+  L2 损失: 8.339074
+自适应损失权重:
+  EQUATION 权重: 1.968875
+  IC 权重: 0.408229
+  L2 权重: 0.622897
+
+16 测试集 L2 损失: 7.939143
+
+===== Epoch 8/10 =====
+平均训练总损失: 8.568673
+各损失分量平均值:
+  EQUATION 损失: 1.494277
+  IC 损失: 0.543862
+  L2 损失: 7.403246
+自适应损失权重:
+  EQUATION 权重: 0.929383
+  IC 权重: 1.089665
+  L2 权重: 0.980952
+
+16 测试集 L2 损失: 6.953058
+
+===== Epoch 9/10 =====
+平均训练总损失: 7.876506
+各损失分量平均值:
+  EQUATION 损失: 1.506863
+  IC 损失: 0.514228
+  L2 损失: 6.719661
+自适应损失权重:
+  EQUATION 权重: 1.162760
+  IC 权重: 1.116493
+  L2 权重: 0.720747
+
+16 测试集 L2 损失: 6.683512
+
+===== Epoch 10/10 =====
+平均训练总损失: 7.179618
+各损失分量平均值:
+  EQUATION 损失: 1.306846
+  IC 损失: 0.495648
+  L2 损失: 6.442357
+自适应损失权重:
+  EQUATION 权重: 2.020327
+  IC 权重: 0.428738
+  L2 权重: 0.550935
+
+16 测试集 L2 损失: 6.108651

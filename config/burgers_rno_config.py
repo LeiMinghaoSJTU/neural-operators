@@ -8,7 +8,7 @@ from .models import ModelConfig
 
 
 class BurgersDatasetConfig(ConfigBase):
-    folder: str = "neuralop/data/datasets/data/"
+    folder: str = "dataset"
     batch_size: int = 16
     n_train: int = 800
     test_batch_sizes: List[int] = [16]
@@ -55,4 +55,4 @@ class Default(ConfigBase):
     opt: BurgersOptConfig = BurgersOptConfig()
     data: BurgersDatasetConfig = BurgersDatasetConfig()
     patching: PatchingConfig = PatchingConfig()
-    wandb: WandbConfig = WandbConfig()
+    wandb: WandbConfig = WandbConfig(log = True, log_output = True)

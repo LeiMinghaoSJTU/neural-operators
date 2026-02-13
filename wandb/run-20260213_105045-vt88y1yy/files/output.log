@@ -1,0 +1,25 @@
+##### 实验配置详情 ######
+{'_config_name': 'default', 'n_params_baseline': None, 'verbose': True, 'arch': 'fno', 'distributed': {'use_distributed': False, 'model_parallel_size': 1, 'seed': None}, 'model': {'model_arch': 'fno', 'lifting_channel_ratio': 2, 'projection_channel_ratio': 2, 'n_layers': 4, 'domain_padding': 0.0, 'norm': None, 'fno_skip': 'linear', 'implementation': 'factorized', 'use_channel_mlp': True, 'channel_mlp_expansion': 0.5, 'channel_mlp_dropout': 0, 'separable': False, 'factorization': None, 'rank': 1.0, 'fixed_rank_modes': False, 'stabilizer': None, 'data_channels': 1, 'out_channels': 1, 'n_modes': [16, 16], 'hidden_channels': 24}, 'opt': {'training_loss': ['equation', 'ic', 'l2'], 'testing_loss': 'l2', 'learning_rate': 0.0001, 'weight_decay': 0.0001, 'eval_interval': 1, 'mixed_precision': False, 'scheduler': 'ReduceLROnPlateau', 'scheduler_T_max': 500, 'scheduler_patience': 100, 'step_size': 60, 'gamma': 0.5, 'n_epochs': 100, 'loss_aggregator': 'relobralo'}, 'data': {'folder': 'data', 'batch_size': 16, 'n_train': 800, 'test_batch_sizes': [16], 'n_tests': [400], 'spatial_length': 16, 'temporal_length': 17, 'temporal_subsample': None, 'encode_input': False, 'encode_output': False, 'include_endpoint': [True, False]}, 'patching': {'levels': 0, 'padding': 0, 'stitching': False}, 'wandb': {'log': True, 'entity': None, 'project': None, 'name': 'burgers_default_fno_4_[16, 16]_24', 'group': None, 'sweep': False, 'log_output': True}}
+尝试打开的路径是: C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages
+Traceback (most recent call last):
+  File "d:\document\python\neural operators\scripts\train_burgers_pino.py", line 114, in <module>
+    train_loader, test_loaders, data_processor = load_mini_burgers_1dtime(
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\neuralop\data\datasets\burgers.py", line 152, in load_mini_burgers_1dtime
+    burgers_dataset = Burgers1dTimeDataset(
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\neuralop\data\datasets\burgers.py", line 102, in __init__
+    super().__init__(
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\neuralop\data\datasets\pt_dataset.py", line 105, in __init__
+    data = torch.load(
+           ^^^^^^^^^^^
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/MR/AppData/Local/Programs/Python/Python312/Lib/site-packages/data/burgers_train_16.pt'

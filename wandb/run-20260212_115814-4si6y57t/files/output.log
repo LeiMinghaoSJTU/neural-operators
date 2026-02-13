@@ -1,0 +1,92 @@
+##### 实验配置详情 ######
+{'_config_name': 'default', 'n_params_baseline': None, 'verbose': True, 'arch': 'fno', 'distributed': {'use_distributed': False, 'model_parallel_size': 1, 'seed': None}, 'model': {'model_arch': 'fno', 'lifting_channel_ratio': 2, 'projection_channel_ratio': 2, 'n_layers': 4, 'domain_padding': 0.0, 'norm': None, 'fno_skip': 'linear', 'implementation': 'factorized', 'use_channel_mlp': True, 'channel_mlp_expansion': 0.5, 'channel_mlp_dropout': 0, 'separable': False, 'factorization': None, 'rank': 1.0, 'fixed_rank_modes': False, 'stabilizer': None, 'data_channels': 1, 'out_channels': 1, 'n_modes': [16, 16], 'hidden_channels': 24}, 'opt': {'training_loss': ['equation', 'ic', 'l2'], 'testing_loss': 'l2', 'learning_rate': 0.0001, 'weight_decay': 0.0001, 'eval_interval': 1, 'mixed_precision': False, 'scheduler': 'ReduceLROnPlateau', 'scheduler_T_max': 500, 'scheduler_patience': 100, 'step_size': 60, 'gamma': 0.5, 'n_epochs': 100, 'loss_aggregator': 'relobralo'}, 'data': {'folder': 'neuralop/data/datasets/data/', 'batch_size': 16, 'n_train': 800, 'test_batch_sizes': [16], 'n_tests': [400], 'spatial_length': 16, 'temporal_length': 17, 'temporal_subsample': None, 'encode_input': False, 'encode_output': False, 'include_endpoint': [True, False]}, 'patching': {'levels': 0, 'padding': 0, 'stitching': False}, 'wandb': {'log': True, 'entity': None, 'project': None, 'name': 'default_fno_4_[16, 16]_24', 'group': None, 'sweep': False, 'log_output': True}}
+尝试打开的路径是: C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages
+Loading test db for resolution 16 with 400 samples
+数据集加载完成：训练批次数量=50, 测试集数量=1
+模型构建完成，部署到cpu
+训练使用的损失函数: ['equation', 'ic', 'l2']
+
+### 模型结构 ###
+ FNO(
+  (positional_embedding): GridEmbeddingND()
+  (fno_blocks): FNOBlocks(
+    (convs): ModuleList(
+      (0-3): 4 x SpectralConv(
+        (weight): DenseTensor(shape=torch.Size([24, 24, 16, 9]), rank=None)
+      )
+    )
+    (fno_skips): ModuleList(
+      (0-3): 4 x Flattened1dConv(
+        (conv): Conv1d(24, 24, kernel_size=(1,), stride=(1,), bias=False)
+      )
+    )
+    (channel_mlp): ModuleList(
+      (0-3): 4 x ChannelMLP(
+        (fcs): ModuleList(
+          (0): Conv1d(24, 12, kernel_size=(1,), stride=(1,))
+          (1): Conv1d(12, 24, kernel_size=(1,), stride=(1,))
+        )
+      )
+    )
+    (channel_mlp_skips): ModuleList(
+      (0-3): 4 x SoftGating()
+    )
+  )
+  (lifting): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(3, 48, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(48, 24, kernel_size=(1,), stride=(1,))
+    )
+  )
+  (projection): ChannelMLP(
+    (fcs): ModuleList(
+      (0): Conv1d(24, 48, kernel_size=(1,), stride=(1,))
+      (1): Conv1d(48, 1, kernel_size=(1,), stride=(1,))
+    )
+  )
+)
+
+### 优化器 ###
+ AdamW (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    correct_bias: True
+    eps: 1e-06
+    lr: 0.0001
+    weight_decay: 0.0001
+)
+
+### 学习率调度器 ###
+ <torch.optim.lr_scheduler.ReduceLROnPlateau object at 0x000001ACA35A2030>
+
+### 损失函数 ###
+
+ * 训练损失（聚合）: Relobralo()
+
+ * 测试损失: {'h1': <neuralop.losses.data_losses.H1Loss object at 0x000001ACA37539B0>, 'l2': <neuralop.losses.data_losses.LpLoss object at 0x000001ACA1B5FFE0>}
+
+### 开始训练...
+
+
+模型总参数数量: 671,113
+C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py:1786: UserWarning: FNO.forward() received unexpected keyword arguments: ['y']. These arguments will be ignored.
+  return forward_call(*args, **kwargs)
+d:\document\python\neural operators\scripts\train_burgers_pino.py:286: UserWarning: BurgersLoss.__call__() received unexpected keyword arguments: ['x']. These arguments will be ignored.
+  loss_val = loss_map[loss_name](pred, x=sample["x"])
+
+===== Epoch 1/100 =====
+平均训练总损失: 18.207293
+各损失分量平均值:
+  EQUATION 损失: 0.000241
+  IC 损失: 1.611476
+  L2 损失: 16.595575
+自适应损失权重:
+  EQUATION 权重: 1.000000
+  IC 权重: 1.000000
+  L2 权重: 1.000000
+
+16 测试集 L2 损失: 16.314694
+C:\Users\MR\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\nn\modules\module.py:1786: UserWarning: FNO.forward() received unexpected keyword arguments: ['y']. These arguments will be ignored.
+  return forward_call(*args, **kwargs)
+d:\document\python\neural operators\scripts\train_burgers_pino.py:286: UserWarning: BurgersLoss.__call__() received unexpected keyword arguments: ['x']. These arguments will be ignored.
+  loss_val = loss_map[loss_name](pred, x=sample["x"])
