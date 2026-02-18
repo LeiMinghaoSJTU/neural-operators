@@ -22,3 +22,4 @@ black
 flaky
 pytest
 neuraloperator
+einops
